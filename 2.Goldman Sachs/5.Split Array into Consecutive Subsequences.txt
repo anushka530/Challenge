@@ -1,0 +1,33 @@
+class Solution {
+    public boolean isPossible(int[] nums) {
+        int n = nums.length;
+        HashMap<Integer,Integer> avl = new HashMap<>();
+        HashMap<Integer,Integer> vac = new HashMap<>();
+        for(int i=0;i<n;i++)
+        {
+            avl.put(nums[i],avl.getOrDefault(nums[i],0)+1);
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(avl.get(nums[i])<=0)
+              continue;
+             else if(vac.getOrDefault(nums[i],0)>0) 
+             {
+                 avl.put(nums[i],avl.getOrDefault(nums[i],0)-1);
+                 vac.put(nums[i],vac.getOrDefault(nums[i],0)-1);
+                 vac.put(nums[i]+1,vac.getOrDefault(nums[i]+1,0)+1);
+             }
+             else if(avl.getOrDefault(nums[i],0)>0 && avl.getOrDefault(nums[i]+1,0)>0 && avl.getOrDefault(nums[i]+2,0)>0)
+             {
+                 avl.put(nums[i], avl.getOrDefault(nums[i],0)-1);
+                 avl.put(nums[i]+1, avl.getOrDefault(nums[i]+1,0)-1);
+                 avl.put(nums[i]+2, avl.getOrDefault(nums[i]+2,0)-1);
+                 vac.put(nums[i]+3, vac.getOrDefault(nums[i]+3,0)+1);
+             }
+             else
+              return false;
+
+        }
+        return true;
+    }
+}

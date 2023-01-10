@@ -1,0 +1,25 @@
+class Solution {
+    int sum=0;
+    int ans=0;
+    int[] bobArrows = new int[12];
+    public int[] maximumBobPoints(int numArrows, int[] aliceArrows) {
+      int[] bobarr = new int[12];  
+      helper(numArrows,aliceArrows,0,bobarr);
+      return bobarr; 
+    }
+    public void helper(int n, int[] arr,int idx,int[] bobarr)
+    {
+        if(idx==12)
+          return;
+        if(n>=0){
+           
+        }
+         sum+=idx;
+          bobarr[idx]=arr[idx]+1;
+        if(n-arr[idx]+1>0)
+            helper(n-arr[idx]+1, arr, idx+1,bobarr);
+        sum-=idx;
+        bobarr[idx]=0;    
+        helper(n, arr, idx+1,bobarr);
+    }
+}
